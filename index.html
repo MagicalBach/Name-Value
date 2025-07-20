@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Name Value Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+
+        #results {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #results p {
+            margin: 5px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Name Value Calculator</h1>
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" placeholder="Your Name">
+        <button onclick="calculateValues()">Calculate</button>
+
+        <div id="results">
+            <h3>Results:</h3>
+            <p id="fibonacciValue">Fibonacci Value: </p>
+            <p id="twoHandValue">Two Hand Value: </p>
+        </div>
+    </div>
+
+    <script>
+        function calculateValues() {
+            const name = document.getElementById("name").value;
+
+            const fibonacciValue = calculateValue(name, {
+                'A': 1, 'a': 1, 'B': 1, 'b': 1, 'Y': 1, 'y': 1, 'Z': 1, 'z': 1,
+                'C': 2, 'c': 2, 'X': 2, 'x': 2,
+                'D': 3, 'd': 3, 'W': 3, 'w': 3,
+                'E': 5, 'e': 5, 'V': 5, 'v': 5,
+                'F': 8, 'f': 8, 'U': 8, 'u': 8,
+                'G': 13, 'g': 13, 'T': 13, 't': 13,
+                'H': 21, 'h': 21, 'S': 21, 's': 21,
+                'I': 34, 'i': 34, 'R': 34, 'r': 34,
+                'J': 55, 'j': 55, 'Q': 55, 'q': 55,
+                'K': 89, 'k': 89, 'P': 89, 'p': 89,
+                'L': 144, 'l': 144, 'O': 144, 'o': 144,
+                'M': 233, 'm': 233, 'N': 233, 'n': 233
+            });
+
+            const twoHandValue = calculateValue(name, {
+                'A': 1, 'a': 1, 'M': 1, 'm': 1, 'N': 1, 'n': 1, 'Z': 1, 'z': 1,
+                'B': 2, 'b': 2, 'L': 2, 'l': 2, 'O': 2, 'o': 2, 'Y': 2, 'y': 2,
+                'C': 3, 'c': 3, 'K': 3, 'k': 3, 'P': 3, 'p': 3, 'X': 3, 'x': 3,
+                'D': 4, 'd': 4, 'J': 4, 'j': 4, 'Q': 4, 'q': 4, 'W': 4, 'w': 4,
+                'E': 5, 'e': 5, 'I': 5, 'i': 5, 'R': 5, 'r': 5, 'V': 5, 'v': 5,
+                'F': 6, 'f': 6, 'H': 6, 'h': 6, 'S': 6, 's': 6, 'U': 6, 'u': 6,
+                'G': 7, 'g': 7, 'T': 7, 't': 7
+            });
+
+            document.getElementById("fibonacciValue").textContent = `Fibonacci Value: ${fibonacciValue}`;
+            document.getElementById("twoHandValue").textContent = `Two Hand Value: ${twoHandValue}`;
+        }
+
+        function calculateValue(name, valueMap) {
+            let totalValue = 0;
+            for (let i = 0; i < name.length; i++) {
+                const char = name[i];
+                if (/[a-zA-Z]/.test(char)) { // Check if the character is a letter
+                    if (valueMap.hasOwnProperty(char)) {
+                        totalValue += valueMap[char];
+                    }
+                    // You can handle unknown characters here if needed
+                }
+            }
+            return totalValue;
+        }
+    </script>
+</body>
+</html>
